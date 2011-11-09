@@ -101,51 +101,73 @@ Then attach GetTweets to the element you just created.
 
   _Usage:_ __{tweetdate}__
 
+  ---------------------------------------------------------------------------
+
 * __Tweet URL__ The url of the tweet.
 
   _Usage:_ __{tweeturl}__
+
+  ---------------------------------------------------------------------------
 
 * __Tweet Text__ The text content of the tweet.
 
   _Usage:_ __{tweettext}__
 
+  ---------------------------------------------------------------------------
+
 * __Tweeter Name__ The name of the tweeter.
 
   _Usage:_ __{tweetuser:name}__
+
+  ---------------------------------------------------------------------------
 
 * __Tweeter Screen Name__ The screen name of the tweeter.
 
   _Usage:_ __{tweetuser:screenname}__
 
+  ---------------------------------------------------------------------------
+
 * __Tweeter Location__ The location of the tweeter.
 
   _Usage:_ __{tweetuser:location}__
+
+  ---------------------------------------------------------------------------
 
 * __Tweeter Description__ The description of the tweeter.
 
   _Usage:_ __{tweetuser:description}__
 
+  ---------------------------------------------------------------------------
+
 * __Tweeter URL__ The url to the tweeter.
 
   _Usage:_ __{tweetuser:url}__
+
+  ---------------------------------------------------------------------------
 
 * __Tweeter Image__ The image of the tweeter.
 
   _Usage:_ __{tweetuser:image}__
 
+  ---------------------------------------------------------------------------
+
 * __Tweet Source__ The source of the tweet.
 
   _Usage:_ __{tweetsource}__
 
-	------------
+  ---------------------------------------------------------------------------
 
 * __reTweet User Name__ The name of the retweeter.
 
   _Usage:_ __{retweetuser:name}__
 
+  ---------------------------------------------------------------------------
+
 * __reTweet User Screen Name__ The screen name of the retweeter.
 
   _Usage:_ __{retweetuser:screenname}__
+
+  ---------------------------------------------------------------------------
 
 * __reTweet User Image__ The image of the retweeter.
 
