@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>GetTweets jQuery Plugin</title>
+  <link rel="stylesheet" href="/_css/styles.css"  />
+</head>
+<body>
+  <div id='tweets'>
+  </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script src="../src/jquery.getTweets.js"></script>
+<script>
+// <![CDATA[     
+    $(document).ready(function(){
+        $("#tweets").getTweets({
+        	twitter_users: ["monkdev","adamrandlett"],
+        	howmany: 20,
+        	replies:true,
+        	retweets:true,
+        	tweetstring:"<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} by <a href='http://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a></p></div> <div class='image'><a href='http://twitter.com/{tweetuser:screenname}'><img src='{tweetuser:image}' width='48' height='48'></a></div></div>"
+        });
+    });
+// ]]> 
+</script>  
+</body>
+</html>

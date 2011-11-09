@@ -1,0 +1,109 @@
+.tweets {
+	width: 286px;
+	min-height: 425px;
+	padding: 0 10px 0 0;
+}
+
+.tweets{
+	border-left: 1px dotted #c6c6c6;
+	padding: 0 0 0 10px;
+}
+
+
+ h3 {
+	border-bottom: 1px dotted #c6c6c6;
+	padding-bottom: 10px;
+	margin-bottom: 0;
+}
+
+.tweet {
+	overflow: hidden;
+	padding: 10px 0;
+	border-bottom: 1px dotted #c6c6c6;
+}
+
+.tweet a{
+    color:#39729f; 
+    text-decoration:none; 
+}
+.tweet a:hover{
+    color:#1d537f;
+}
+.tweet a[href*='search.twitter.com'] {
+    color:#999;    
+    text-decoration:none;
+}
+.tweet a[href*='search.twitter.com']:hover{
+    color:#333;    
+    text-decoration:none;
+}
+
+.tweet .image {
+	float: right;
+	width: 76px;
+	display: inline;
+}
+
+.tweet .image img {
+	padding: 4px;
+	margin: 0;
+	border: 0;
+	display: block;
+	background: #fff;
+	-moz-box-shadow: 0 0 2px #888;
+	-webkit-box-shadow: 0 0 2px #888;
+	box-shadow: 0 0 2px #888;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.tweet .header {
+	float: left;
+	width: 206px;
+	display: inline;
+}
+
+article header {
+	width: 516px;
+}
+
+article header h4 {
+	margin-bottom: 3px;
+}
+
+article header h4 a {
+	color: #343434;
+}
+
+article header h4 a:hover {
+	
+}
+
+article header .comments {
+	margin-bottom: 3px;
+}
+
+
+.tweet .header .meta {
+	margin: 0 0 5px 0;
+	font-size: 85%;
+	color: #5c5c5c;
+}
+
+article header .meta span {
+	color: #343434;
+	font-weight: bold;
+}
+
+.tweet .header .summary {
+	margin-bottom: 5px;
+}
+
+.rt{
+  display: inline-block;
+  background: url(/_img/retweet.png) no-repeat right top;
+  width: 13px;
+  height: 8px;
+  text-indent: -9999em;
+}
