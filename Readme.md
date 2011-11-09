@@ -2,7 +2,7 @@ GetTweets
 ==========
 A jQuery plugin for displaying tweets.
 
-The GetTweets jQuery plugin can pull tweets from multiple users. The plugin has support for hiding/showing retweets and replyies, custom output using variable plugs and specifying number of tweets*. 
+The GetTweets jQuery plugin can pull tweets from multiple users. The plugin has support for hiding/showing retweets and replies, custom output using variable plugs and specifying number of tweets*. 
 
 Developed by Adam Randlett at [Monk Development](http://www.monkdevelopment.com)
 
