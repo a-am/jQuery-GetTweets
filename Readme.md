@@ -97,21 +97,59 @@ Then attach GetTweets to the element you just created.
 
 ##Tweet String Variables
 
-| __Name__             | __Usage__                   | __Description__                                          |                                                      
-| ---------------------| --------------------------- | -------------------------------------------------------- |
-| Tweet Date           | {tweetdate}                 | Post Date of tweet in nice format '_about 10 hours ago_' |
-| Tweet Url	           | {tweeturl}                  | Url of the tweet                                         |
-| Tweet Text           | {tweettext}                 | The content of the tweet                                 |
-| Tweeter Name         | {tweetuser:name}            | The name of the tweeter                                  |
-| Tweeter Screen Name  | {tweetuser:screenname}      | The screen name of the tweeter                           |
-| Tweeter Location     | {tweetuser:location}        | The location of the tweeter                              |
-| Tweeter Description  | {tweetuser:description}     | The description of the tweeter                           |
-| Tweeter URL          | {tweetuser:url}             | The url of the tweeter                                   |
-| Tweeter Image        | {tweetuser:image}           | The image of the tweeter                                 |
-| Tweet Source         | {tweetsource}               | The source of the tweet                                  |
-| reTweeter Name       | {retweetuser:name}          | The name of the retweeter                                |
-| reTweeter Screen Name| {retweetuser:screenname}    | The name of the retweeter                                |
-| reTweeter Description| {retweetuser:description}   | The description of the retweeter                         |
+* __Tweet Date__  The date of the tweet in nice format '_about 10 hours ago_'
+
+  _Usage:_ __{tweetdate}__
+
+* __Tweet URL__ The url of the tweet.
+
+  _Usage:_ __{tweeturl}__
+
+* __Tweet Text__ The text content of the tweet.
+
+  _Usage:_ __{tweettext}__
+
+* __Tweeter Name__ The name of the tweeter.
+
+  _Usage:_ __{tweetuser:name}__
+
+* __Tweeter Screen Name__ The screen name of the tweeter.
+
+  _Usage:_ __{tweetuser:screenname}__
+
+* __Tweeter Location__ The location of the tweeter.
+
+  _Usage:_ __{tweetuser:location}__
+
+* __Tweeter Description__ The description of the tweeter.
+
+  _Usage:_ __{tweetuser:description}__
+
+* __Tweeter URL__ The url to the tweeter.
+
+  _Usage:_ __{tweetuser:url}__
+
+* __Tweeter Image__ The image of the tweeter.
+
+  _Usage:_ __{tweetuser:image}__
+
+* __Tweet Source__ The source of the tweet.
+
+  _Usage:_ __{tweetsource}__
+
+	------------
+
+* __reTweet User Name__ The name of the retweeter.
+
+  _Usage:_ __{retweetuser:name}__
+
+* __reTweet User Screen Name__ The screen name of the retweeter.
+
+  _Usage:_ __{retweetuser:screenname}__
+
+* __reTweet User Image__ The image of the retweeter.
+
+  _Usage:_ __{retweetuser:image}__
 
 
 ##Feedback
