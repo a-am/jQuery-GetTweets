@@ -19,7 +19,7 @@
 			format: "json",
 			howmany: 4,
 			retweets:true,
-			replies:true,
+			no_replies:true,
 			rate_limit_status:false,
 			tweetstring:"<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} by <a href='http://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a></p></div> <div class='image'><a href='http://twitter.com/{tweetuser:screenname}'><img src='{tweetuser:image}' width='48' height='48'></a></div></div>",
 		  
@@ -36,7 +36,7 @@
 	  				    tweetstring:options.tweetstring,
 	  				    retweetstring:options.retweetstring,
 	  				    retweets:options.retweets,
-	  				    replies:options.replies,
+	  				    no_replies:options.no_replies,
 					    rate_limit_status:options.rate_limit_status
 	  			    },
 				  global_tweets = [],
@@ -158,7 +158,7 @@
 			function get_tweets(index){ 
 				$.ajax({
 			  	    dataType:"jsonp", 
-			  	    url: options.twitter_api_url+'.'+options.format+'?&screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.replies+'&count='+tweetoptions.howmany+'&callback=?',
+			  	    url: options.twitter_api_url+'.'+options.format+'?&screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.no_replies+'&count='+tweetoptions.howmany+'&callback=?',
 			  	    timeout: 1000,
 			  	    type:"GET",
 			  	    async:false,

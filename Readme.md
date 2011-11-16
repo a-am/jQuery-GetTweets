@@ -2,7 +2,7 @@ GetTweets
 ==========
 A jQuery plugin for displaying tweets.
 
-The GetTweets jQuery plugin can pull tweets from multiple users. The plugin has support for hiding/showing retweets and replies, custom output using variable plugs and specifying number of tweets*. 
+The GetTweets jQuery plugin can pull tweets from multiple users. The plugin has support for hiding/showing retweets and replyies, custom output using variable plugs and specifying number of tweets*. 
 
 Developed by Adam Randlett at [Monk Development](http://www.monkdevelopment.com)
 
@@ -34,7 +34,7 @@ Then attach GetTweets to the element you just created.
     $("#tweets").getTweets({
        	twitter_users: ["monkdev","adamrandlett"],
        	howmany: 20,
-       	replies:true,
+       	no_replies:true,
        	retweets:true
     });
 
@@ -61,11 +61,11 @@ Then attach GetTweets to the element you just created.
 
 	---------------------------------------------------------------------------
 
-*   **replies** _boolean_, false
+*   **no_replies** _boolean_, false
 
-	Allow replies of users to output from timeline
+	Allow replies to be turned off
 	
-	_Default:_ true
+	_Default:_ false
 
 	---------------------------------------------------------------------------
 
@@ -96,78 +96,55 @@ Then attach GetTweets to the element you just created.
     	<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} <a href='http://twitter.com/{retweetuser:screenname}'>{retweetuser:name}</a> <span class='rt'>retweeted</span> by <a href='http://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a> </p></div> <div class='image'><a href='http://twitter.com/{tweetuser:screenname}'><img src='{retweetuser:image}' width='48' height='48'></a></div></div>
 
 ##Tweet String Variables
-
 * __Tweet Date__  The date of the tweet in nice format '_about 10 hours ago_'
 
   _Usage:_ __{tweetdate}__
-
-  ---------------------------------------------------------------------------
 
 * __Tweet URL__ The url of the tweet.
 
   _Usage:_ __{tweeturl}__
 
-  ---------------------------------------------------------------------------
-
 * __Tweet Text__ The text content of the tweet.
 
   _Usage:_ __{tweettext}__
-
-  ---------------------------------------------------------------------------
 
 * __Tweeter Name__ The name of the tweeter.
 
   _Usage:_ __{tweetuser:name}__
 
-  ---------------------------------------------------------------------------
-
 * __Tweeter Screen Name__ The screen name of the tweeter.
 
   _Usage:_ __{tweetuser:screenname}__
-
-  ---------------------------------------------------------------------------
 
 * __Tweeter Location__ The location of the tweeter.
 
   _Usage:_ __{tweetuser:location}__
 
-  ---------------------------------------------------------------------------
-
 * __Tweeter Description__ The description of the tweeter.
 
   _Usage:_ __{tweetuser:description}__
-
-  ---------------------------------------------------------------------------
 
 * __Tweeter URL__ The url to the tweeter.
 
   _Usage:_ __{tweetuser:url}__
 
-  ---------------------------------------------------------------------------
-
 * __Tweeter Image__ The image of the tweeter.
 
   _Usage:_ __{tweetuser:image}__
-
-  ---------------------------------------------------------------------------
 
 * __Tweet Source__ The source of the tweet.
 
   _Usage:_ __{tweetsource}__
 
-  ---------------------------------------------------------------------------
+	------------
 
 * __reTweet User Name__ The name of the retweeter.
 
   _Usage:_ __{retweetuser:name}__
 
-  ---------------------------------------------------------------------------
-
 * __reTweet User Screen Name__ The screen name of the retweeter.
 
   _Usage:_ __{retweetuser:screenname}__
-
-  ---------------------------------------------------------------------------
 
 * __reTweet User Image__ The image of the retweeter.
 
