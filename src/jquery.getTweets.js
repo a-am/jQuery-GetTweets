@@ -97,7 +97,7 @@
 					    var tweettext = tweet.text;
 					    var tweetapi = {
 					    	'{tweetdate}' : twitter_relative_time(tweet.created_at) , // Calculate how many hours ago was the tweet posted  
-					    	'{tweeturl}'  : 'http://www.twitter.com/' +  tweet.user.name + '/status/' + tweet.id ,
+ 					    	'{tweeturl}'  : 'http://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str ,
 					    	'{tweettext}' : tweettext.parseUrl().parseUsername().parseHashtag(),
 					    	'{tweetuser:name}' : tweet.user.name,
 					    	'{tweetuser:screenname}' : tweet.user.screen_name,
