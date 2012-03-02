@@ -61,15 +61,20 @@
 			  }else{return(parseInt(delta/86400)).toString()+' days ago';}
 			} 
 			// parses any url and adds anchor for that url
-			String.prototype.parseUrl = function(){
-			  var urlRegex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
-			  return this.replace(urlRegex, function(url) {
-			          return '<a href="' + url + '">' + url + '</a>';
-			  });
-			};
+ 			String.prototype.parseUrl = function() {
+      	return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
+      		return url.link(url);
+      	});
+      };
+ 			String.prototype.parseEmail = function(){
+ 			  var urlRegex = new RegExp(/([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})/gi);
+ 			  return this.replace(urlRegex, function(url) {
+ 			    return '<a href="mailto:' + url + '">' + url + '</a>';
+ 			  });
+ 			};
 			//parsers twitter @usernames creates anchor for that username
 			String.prototype.parseUsername = function() {
-				return this.replace(new RegExp(/[@]+[A-Za-z0-9-_]+/g), function(u) {
+				return this.replace(new RegExp(/[@]+[A-Za-z0-9-_]+(?:\s)/g), function(u) {
 					var username = u.replace("@","")
 					return u.link("http://twitter.com/"+username);
 				});
@@ -98,7 +103,7 @@
 					    var tweetapi = {
 					    	'{tweetdate}' : twitter_relative_time(tweet.created_at) , // Calculate how many hours ago was the tweet posted  
  					    	'{tweeturl}'  : 'http://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str ,
-					    	'{tweettext}' : tweettext.parseUrl().parseUsername().parseHashtag(),
+					    	'{tweettext}' : tweettext.parseUrl().parseEmail().parseUsername().parseHashtag(),
 					    	'{tweetuser:name}' : tweet.user.name,
 					    	'{tweetuser:screenname}' : tweet.user.screen_name,
 					    	'{tweetuser:location}' : tweet.user.location,
