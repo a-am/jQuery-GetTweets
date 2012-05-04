@@ -36,6 +36,8 @@ Then attach GetTweets to the element you just created.
        	howmany: 20,
        	no_replies:true,
        	retweets:true
+    },function(){
+
     });
 
 
