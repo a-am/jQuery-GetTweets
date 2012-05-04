@@ -11,7 +11,7 @@
 */  
 
 (function($){
-	$.fn.getTweets = function(settings){
+	$.fn.getTweets = function(settings,callback){
 	    //default options for plugin 
 		var defaults = {
 			twitter_api_url: "http://api.twitter.com/1/statuses/user_timeline",
@@ -128,7 +128,7 @@
 							id:tweet.id,
 							status:tweet_html
 						});
-	                }
+	         }
 				});	
 			}
             //outputs the tweets to the assigned jquery object
@@ -139,6 +139,10 @@
 				for(var i=0; i<tweetoptions.howmany; i++){
 					$this.append(global_tweets[i].status);
 				}
+				//activate callback
+				if(typeof callback == 'function'){
+          callback.call(this);
+        }
 			} 
 			// displays rate limit status to javascritp console
 			// rate limit status variable must be set to true for ouptut.
