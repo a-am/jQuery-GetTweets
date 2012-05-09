@@ -8,6 +8,7 @@ Developed by Adam Randlett at [Monk Development](http://www.monkdevelopment.com)
 
 ##Features
 *	**Twitter Users** Tweets from any number of users can be fetched.
+*	**Twitter Search** Search by queries. Hashes, mentions or search term. **If used it will override tweets by twitter_users**
 *   **Retweets**  Retweets can be turned off. On by default.
 *   **Replies**   Replies can be turned off. On by default.
 *   **Format**    The html output of the tweet can be specified uniqly for both Tweets & Retweets.
@@ -16,7 +17,7 @@ Developed by Adam Randlett at [Monk Development](http://www.monkdevelopment.com)
 
 ##Requirements
 *   jQuery 1.4.2 or newer.
-*   All modern browsers are supported, as well as IE 6 and newer.
+*   All modern browsers are supported, as well as IE7 and newer.
 
 ##Getting Started
 To start make sure both [jQuery](http://jquery.com) and GetTweets are included in your html.
@@ -45,6 +46,11 @@ Then attach GetTweets to the element you just created.
 *   **twitter_users** _array_, ['monkdev','adamrandlett']
 
 	An array of twitter usernames.
+
+	---------------------------------------------------------------------------
+*   **twitter_queries** _array_, ['#code','design']
+
+	Get tweets by array of search queries. **If used it will override tweets by twitter_users.** 
 
 	---------------------------------------------------------------------------
 *   **howmany** _integer_, 4
@@ -151,6 +157,28 @@ Then attach GetTweets to the element you just created.
 * __reTweet User Image__ The image of the retweeter.
 
   _Usage:_ __{retweetuser:image}__
+  
+ 
+##Tweet String Variables (Search Queries Only)
+* __Tweet Date__  The date of the tweet in nice format '_about 10 hours ago_'
+
+  _Usage:_ __{tweetdate}__
+
+* __Tweet URL__ The url of the tweet.
+
+  _Usage:_ __{tweeturl}__
+
+* __Tweet Text__ The text content of the tweet.
+
+  _Usage:_ __{tweettext}__
+
+* __Tweeter Name__ The name of the tweeter.
+
+  _Usage:_ __{tweetuser:name}__
+
+* __Tweeter Screen Name__ The screen name of the tweeter.
+
+  _Usage:_ __{tweetuser:screenname}__
 
 
 ##Feedback
