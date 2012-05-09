@@ -12,7 +12,7 @@ Developed by Adam Randlett at [Monk Development](http://www.monkdevelopment.com)
 *   **Retweets**  Retweets can be turned off. On by default.
 *   **Replies**   Replies can be turned off. On by default.
 *   **Format**    The html output of the tweet can be specified uniqly for both Tweets & Retweets.
-*   **Rate Limit Status**  *Twitter [limits](https://dev.twitter.com/docs/rate-limiting) the amount of data that can be retunred per user to 150 requests per hour. This is mainly only an issue when testing your output. This feature can be turned on to see what your current rate is.  This will output a log into your browsers developer console.
+*   **Rate Limit Status**  *Twitter [limits](https://dev.twitter.com/docs/rate-limiting) the amount of data that can be returned per user to 150 requests per hour. This is mainly only an issue when testing your output. This feature can be turned on to see what your current rate is.  This will output a log into your browsers developer console.
 *   **Rely & Hastag url**  The plugin automatically creates links to reply tags and hashtags in the tweet content.
 
 ##Requirements
