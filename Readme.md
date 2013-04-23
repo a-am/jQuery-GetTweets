@@ -2,9 +2,9 @@ GetTweets
 ==========
 A jQuery plugin for displaying tweets.
 
-The GetTweets jQuery plugin can pull tweets from multiple users. The plugin has support for hiding/showing retweets and replyies, custom output using variable plugs and specifying number of tweets*. 
+The GetTweets jQuery plugin can pull tweets from multiple users. The plugin has support for hiding/showing retweets and replies, custom output using variable plugs and specifying number of tweets*. 
 
-Developed by Adam Randlett at [Monk Development](http://www.monkdevelopment.com)
+Developed by Adam Randlett [@adamrandlett](http://twitter.com/adamrandlett)
 
 ##Features
 *	**Twitter Users** Tweets from any number of users can be fetched.
@@ -16,15 +16,27 @@ Developed by Adam Randlett at [Monk Development](http://www.monkdevelopment.com)
 *   **Rely & Hastag url**  The plugin automatically creates links to reply tags and hashtags in the tweet content.
 
 ##Requirements
-*   jQuery 1.4.2 or newer.
+*   jQuery 1.4.2 to 1.9.1. Version 2.0 is untested. 
 *   All modern browsers are supported, as well as IE7 and newer.
+*   Twitter application credentials [http://dev.twitter.com/apps](https://dev.twitter.com/apps)
+*   An OAuth 1.0A library written in PHP by @themattharris, specifically for use with the Twitter API. [tmhOAuth](https://github.com/themattharris/tmhOAuth) 
+*   Included php files to return json after authentication: timeline_response.php, search_response.php, app_tokens.php
 
 ##Getting Started
-To start make sure both [jQuery](http://jquery.com) and GetTweets are included in your html.
+Add the three included php files (timeline_response.php, search_response.php, app_tokens.php, rate_status_limit_response.php *optional) to the site files where you specified the application url in your dev.twitter account for the application.
+
+Add your application Consumer Key, Consumer Secret, Access Token and Access Token Secret to the app_tokes.php file.
+
+    $consumer_key = '';
+    $consumer_secret = '';
+    $user_token = '';
+    $user_secret = '';
+
+Make sure both [jQuery](http://jquery.com) and GetTweets are included in your html.
 
     <script src="jquery.min.js"></script>
     <script src="jquery.getTweets.js"></script>
-
+    
 
 Next create a html element with class or id.
 
@@ -33,7 +45,7 @@ Next create a html element with class or id.
 Then attach GetTweets to the element you just created.
 
     $("#tweets").getTweets({
-       	twitter_users: ["monkdev","adamrandlett"],
+       	twitter_users: ["adamrandlett"],
        	howmany: 20,
        	no_replies:true,
        	retweets:true
@@ -43,6 +55,21 @@ Then attach GetTweets to the element you just created.
 
 
 ##Options
+*   **twitter_timeline_url** _string_, 'timeline_response.php'
+
+	Url to the file that returns the timeline statuses json.
+
+	---------------------------------------------------------------------------
+*   **twitter_search_url** _string_, 'search_response.php'
+
+	Url to the file that returns the search statuses json.
+
+	---------------------------------------------------------------------------
+*   **twitter_rate_limit_url** _string_, 'rate_limit_status_response.php'
+
+	Url to the file that returns the rate limit data in json. This is optional. If you enable rate_limit_status you will need this url. 
+
+	---------------------------------------------------------------------------
 *   **twitter_users** _array_, ['monkdev','adamrandlett']
 
 	An array of twitter usernames.
@@ -179,10 +206,21 @@ Then attach GetTweets to the element you just created.
 * __Tweeter Screen Name__ The screen name of the tweeter.
 
   _Usage:_ __{tweetuser:screenname}__
+  
+* __Tweeter URL__ The url to the tweeter.
+
+  _Usage:_ __{tweetuser:url}__
+
+* __Tweeter Image__ The image of the tweeter.
+
+  _Usage:_ __{tweetuser:image}__
 
 
 ##Feedback
 Please open an issue to request a feature or submit a bug report. I'm am also available on twitter [@adamrandlett](http://www.twitter.com/adamrandlett).
+
+#####Thanks
+Adam Green [@140dev](http://twitter.com/140dev) for direction on OAuth for twitter. 
 
 
 
