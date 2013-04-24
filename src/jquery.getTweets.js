@@ -86,6 +86,14 @@
       };
 
 
+      String.prototype.parseEmail = function(){
+        var urlRegex = new RegExp(/([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})/gi);
+        return this.replace(urlRegex, function(url) {
+          return '<a href="mailto:' + url + '">' + url + '</a>';
+        });
+      };
+
+
       // parses hashtags and adds url to tiwtter search for that hashtag
       String.prototype.parseHashtag = function() {
         return this.replace(new RegExp(/[#]+[A-Za-z0-9-_]+/g), function(t) {
@@ -127,7 +135,7 @@
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at), // Calculate how many hours ago was the tweet posted
                   '{tweeturl}'  : 'http://www.twitter.com/' +  tweet.from_user_name + '/status/' + tweet.id_str ,
-                  '{tweettext}' : tweettext.parseUrl().parseUsername().parseHashtag(),
+                  '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
                   '{tweetuser:name}' : tweet.from_user_name,
                   '{tweetuser:screenname}' : tweet.from_user,
                   '{tweetuser:url}': tweet.user.url,
@@ -139,7 +147,7 @@
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at) , // Calculate how many hours ago was the tweet posted
                   '{tweeturl}'  : 'http://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str ,
-                  '{tweettext}' : tweettext.parseUrl().parseUsername().parseHashtag(),
+                  '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
                   '{tweetuser:name}' : tweet.user.name,
                   '{tweetuser:screenname}' : tweet.user.screen_name,
                   '{tweetuser:location}' : tweet.user.location,
