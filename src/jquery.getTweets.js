@@ -191,7 +191,7 @@
         global_tweets.sort(function(a,b){ return(b.id-a.id) });
         twitter_count = global_tweets.length;
 
-        for(var i = 0, ii = tweetoptions.howmany; i < ii; i++){
+        for(var i = 0, ii = twitter_count; i < ii; i++){
           $this.append(global_tweets[i].status);
         }
 
