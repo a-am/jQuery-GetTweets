@@ -25,8 +25,8 @@
       retweets: false,
       no_replies: false,
       rate_limit_status: false,
-      tweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} by <a href='http://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a></p></div> <div class='image'><a href='http://twitter.com/{tweetuser:screenname}'><img src='{tweetuser:image}' width='48' height='48'></a></div></div>",
-      retweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} <a href='http://twitter.com/{retweetuser:screenname}'>{retweetuser:name}</a> <span class='rt'>retweeted</span> by <a href='http://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a> </p></div> <div class='image'><a href='http://twitter.com/{tweetuser:screenname}'><img src='{retweetuser:image}' width='48' height='48'></a></div></div>"
+      tweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} by <a href='https://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a></p></div> <div class='image'><a href='https://twitter.com/{tweetuser:screenname}'><img src='{tweetuser:image}' width='48' height='48'></a></div></div>",
+      retweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} <a href='https://twitter.com/{retweetuser:screenname}'>{retweetuser:name}</a> <span class='rt'>retweeted</span> by <a href='https://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a> </p></div> <div class='image'><a href='https://twitter.com/{tweetuser:screenname}'><img src='{retweetuser:image}' width='48' height='48'></a></div></div>"
     }
         //extend default to options
         var options = $.extend(defaults, settings);
@@ -81,7 +81,7 @@
       String.prototype.parseUsername = function() {
         return this.replace(new RegExp(/[@]+[A-Za-z0-9-_]+/g), function(u) {
           var username = u.replace("@","")
-          return u.link("http://twitter.com/"+username);
+          return u.link("https://twitter.com/"+username);
         });
       };
 
@@ -98,7 +98,7 @@
       String.prototype.parseHashtag = function() {
         return this.replace(new RegExp(/[#]+[A-Za-z0-9-_]+/g), function(t) {
           var tag = t.replace("#","%23")
-          return t.link("http://search.twitter.com/search?q="+tag);
+          return t.link("https://twitter.com/search?q="+tag);
         });
       };
 
@@ -134,7 +134,7 @@
 
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at), // Calculate how many hours ago was the tweet posted
-                  '{tweeturl}'  : 'http://www.twitter.com/' +  tweet.from_user_name + '/status/' + tweet.id_str ,
+                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.from_user_name + '/status/' + tweet.id_str ,
                   '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
                   '{tweetuser:name}' : tweet.from_user_name,
                   '{tweetuser:screenname}' : tweet.from_user,
@@ -146,7 +146,7 @@
 
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at) , // Calculate how many hours ago was the tweet posted
-                  '{tweeturl}'  : 'http://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str ,
+                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str ,
                   '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
                   '{tweetuser:name}' : tweet.user.name,
                   '{tweetuser:screenname}' : tweet.user.screen_name,
