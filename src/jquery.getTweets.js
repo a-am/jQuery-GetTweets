@@ -1,9 +1,9 @@
 /*
   * GetTweets v@VERSION
   *
-  * A jQuery plugin to retrive tweets from multiple users
+  * A jQuery plugin to retrieve tweets from multiple users
   *
-  * https://github.com/adamatmonk/jquery-gettweets
+  * https://github.com/a-am/jQuery-GetTweets
   *
   * Copyright 2011 by Adam Randlett
     * Released under the MIT License
@@ -27,7 +27,7 @@
       rate_limit_status: false,
       tweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} by <a href='https://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a></p></div> <div class='image'><a href='https://twitter.com/{tweetuser:screenname}'><img src='{tweetuser:image}' width='48' height='48'></a></div></div>",
       retweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} <a href='https://twitter.com/{retweetuser:screenname}'>{retweetuser:name}</a> <span class='rt'>retweeted</span> by <a href='https://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a> </p></div> <div class='image'><a href='https://twitter.com/{tweetuser:screenname}'><img src='{retweetuser:image}' width='48' height='48'></a></div></div>"
-    }
+    };
         //extend default to options
         var options = $.extend(defaults, settings);
         return this.each(function(){
@@ -80,7 +80,7 @@
       //parsers twitter @usernames creates anchor for that username
       String.prototype.parseUsername = function() {
         return this.replace(new RegExp(/[@]+[A-Za-z0-9-_]+/g), function(u) {
-          var username = u.replace("@","")
+          var username = u.replace("@","");
           return u.link("https://twitter.com/"+username);
         });
       };
@@ -97,7 +97,7 @@
       // parses hashtags and adds url to tiwtter search for that hashtag
       String.prototype.parseHashtag = function() {
         return this.replace(new RegExp(/[#]+[A-Za-z0-9-_]+/g), function(t) {
-          var tag = t.replace("#","%23")
+          var tag = t.replace("#","%23");
           return t.link("https://twitter.com/search?q="+tag);
         });
       };
@@ -115,11 +115,11 @@
 
       Storage.prototype.setObject = function(key, value) {
           this.setItem(key, JSON.stringify(value));
-      }
+      };
 
       Storage.prototype.getObject = function(key) {
           return JSON.parse(this.getItem(key));
-      }
+      };
 
       /*
        * Parses the tweetstring or retweetstring for the tweet variables
@@ -140,7 +140,7 @@
                   '{tweetuser:screenname}' : tweet.from_user,
                   '{tweetuser:url}': tweet.user.url,
                   '{tweetuser:image}': tweet.user.profile_image_url
-                }
+                };
 
               }else{
 
@@ -155,7 +155,7 @@
                   '{tweetuser:url}': tweet.user.url,
                   '{tweetuser:image}': tweet.user.profile_image_url,
                   '{tweetsource}': tweet.source
-                }
+                };
               }
 
               var tweet_html,
@@ -186,12 +186,10 @@
       /*
        * Outputs the tweets to the assigned jquery object
        */
-
       function twitter_output(){
         global_tweets.sort(function(a,b){ return(b.id-a.id) });
-        twitter_count = global_tweets.length;
 
-        for(var i = 0, ii = twitter_count; i < ii; i++){
+	      for(var i = 0, ii = tweetoptions.howmany; i < ii; i++){
           $this.append(global_tweets[i].status);
         }
 
@@ -223,18 +221,20 @@
 
       /*
        * function to get the tweets for the twitter service
-       * Uses jQuerys ajax call
+       * Uses jQuery ajax call
        * Using jsonp since we are calling cross urls
        */
 
       function get_tweets(index){
-
+				
+				var tweet_count = tweetoptions.howmany + 5; // pad with more tweets in case some are filtered out
+				
         if(tweetoptions.twitter_queries.length > 0){
 
           options._isSearch = true;
           $.ajax({
             dataType: 'json',
-            url: options.twitter_search_url+'?q='+encodeURIComponent(tweetoptions.twitter_queries[index])+'&include_entities=true'+'&count='+tweetoptions.howmany,
+            url: options.twitter_search_url+'?q='+encodeURIComponent(tweetoptions.twitter_queries[index])+'&include_entities=true'+'&count='+tweet_count,
             timeout: 1000,
             type: 'GET',
             async: false,
@@ -260,7 +260,7 @@
 
           $.ajax({
             dataType: 'json',
-            url: options.twitter_timeline_url+'?screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.replies+'&count='+tweetoptions.howmany,
+            url: options.twitter_timeline_url+'?screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.replies+'&count='+tweet_count,
             timeout: 1000,
             type: 'GET',
             async: false,
