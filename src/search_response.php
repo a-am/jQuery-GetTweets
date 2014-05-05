@@ -10,25 +10,27 @@ if (!empty($_GET['q'])) {
 	require 'app_tokens.php';
 	require 'tmhOAuth.php';
 	$connection = new tmhOAuth(array(
-	  'consumer_key'    => $consumer_key,
-	  'consumer_secret' => $consumer_secret,
-	  'user_token'      => $user_token,
-	  'user_secret'     => $user_secret
-	));
+			'consumer_key'    => $consumer_key,
+			'consumer_secret' => $consumer_secret,
+			'user_token'      => $user_token,
+			'user_secret'     => $user_secret
+		));
 
 	// Run the search with the Twitter API
+	// https://dev.twitter.com/docs/api/1.1/get/search/tweets
 	$http_code = $connection->request('GET',$connection->url('search/tweets'),
-		    	array('q' => $search_terms,
-		    	'count' => 100,
-		    	'lang' => 'en',
-				  'type' => 'recent'));
+		array('q' => $search_terms,
+			'count' => 100,
+			'lang' => 'en',
+			'type' => 'recent'
+		));
 
 	// Search was successful
 	if ($http_code == 200) {
 		header('Content-Type: application/json; charset=utf-8');
 		// Extract the tweets from the API response
 		print $connection->response['response'];
-	// Handle errors from API request
+		// Handle errors from API request
 	} else {
 		if ($http_code == 429) {
 			print 'Error: Twitter API rate limit reached';

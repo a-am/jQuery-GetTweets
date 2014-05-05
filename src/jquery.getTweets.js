@@ -50,12 +50,11 @@
           user_count;
 
 
-      //provided by twitter
+      // parses created_at
       function twitter_relative_time(time_value) {
         var values=time_value.split(" ");
-        //created_at different for search call than id call. Rearange stamp values to get this format: May 09, 2012 14:31:44
-        var time_value= options._isSearch ? values[2]+" "+values[1]+", "+values[3]+" "+values[4] : values[1]+" "+values[2]+", "+values[5]+" "+values[3];
-        var parsed_date=Date.parse(time_value);
+        var time_value= values[1]+" "+values[2]+", "+values[5]+" "+values[3];var parsed_date=Date.parse(time_value);
+        // var time_value= options._isSearch ? values[2]+" "+values[1]+", "+values[3]+" "+values[4] : values[1]+" "+values[2]+", "+values[5]+" "+values[3];
         var relative_to=(arguments.length>1)?arguments[1]:new Date();
         var delta=parseInt((relative_to.getTime()-parsed_date)/1000);
         delta=delta+(relative_to.getTimezoneOffset()*60);
@@ -134,19 +133,21 @@
 
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at), // Calculate how many hours ago was the tweet posted
-                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.from_user_name + '/status/' + tweet.id_str ,
+                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str,
                   '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
-                  '{tweetuser:name}' : tweet.from_user_name,
-                  '{tweetuser:screenname}' : tweet.from_user,
+                  '{tweetuser:name}' : tweet.user.name,
+                  '{tweetuser:screenname}' : tweet.user.screen_name,
                   '{tweetuser:url}': tweet.user.url,
-                  '{tweetuser:image}': tweet.user.profile_image_url
+                  '{tweetuser:image}': tweet.user.profile_image_url,
+                  '{tweetuser:location}' : tweet.user.location,
+                  '{tweetuser:description}' : tweet.user.description
                 };
 
               }else{
 
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at) , // Calculate how many hours ago was the tweet posted
-                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str ,
+                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str,
                   '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
                   '{tweetuser:name}' : tweet.user.name,
                   '{tweetuser:screenname}' : tweet.user.screen_name,
