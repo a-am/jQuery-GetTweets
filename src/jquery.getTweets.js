@@ -188,9 +188,11 @@
        * Outputs the tweets to the assigned jquery object
        */
       function twitter_output(){
-        global_tweets.sort(function(a,b){ return(b.id-a.id) });
 
-	      for(var i = 0, ii = tweetoptions.howmany; i < ii; i++){
+        global_tweets.sort(function(a,b){ return(b.id-a.id) });
+        var output_count = Math.min(global_tweets.length, tweetoptions.howmany);
+
+        for(var i = 0, ii = output_count; i < ii; i++){
           $this.append(global_tweets[i].status);
         }
 
@@ -227,9 +229,9 @@
        */
 
       function get_tweets(index){
-				
-				var tweet_count = tweetoptions.howmany + 5; // pad with more tweets in case some are filtered out
-				
+
+				var tweet_count = tweetoptions.howmany + 4; // pad with more tweets in case some are excluded
+
         if(tweetoptions.twitter_queries.length > 0){
 
           options._isSearch = true;
@@ -248,7 +250,7 @@
             },
             complete: function(){
               if(index < tweetoptions.twitter_queries.length -1){
-                //run this function (recursivly) to get all tweets for the next user
+                //run this function (recursively) to get all tweets for the next user
                 get_tweets(++index);
               }else{
                 //if all tweets are loaded into the global_tweets array and launch twitter_render function
@@ -261,7 +263,7 @@
 
           $.ajax({
             dataType: 'json',
-            url: options.twitter_timeline_url+'?screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.replies+'&count='+tweet_count,
+            url: options.twitter_timeline_url+'?screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.no_replies+'&count='+tweet_count,
             timeout: 1000,
             type: 'GET',
             async: false,
