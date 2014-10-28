@@ -1,13 +1,19 @@
 /*
-  * GetTweets v@VERSION
-  *
-  * A jQuery plugin to retrieve tweets from multiple users
-  *
-  * https://github.com/a-am/jQuery-GetTweets
-  *
-  * Copyright 2011 by Adam Randlett
-    * Released under the MIT License
-    * http://en.wikipedia.org/wiki/MIT_License
+	* getTweets
+	*
+	* Retrieve tweets from multiple users or search queries
+	*
+	* Adam Randlett
+	* Chris Ullyott
+	*
+	* MonkDev repository:
+	* https://github.com/MonkDev/jQuery-GetTweets
+	*
+	* Original repository:
+	* https://github.com/a-am/jQuery-GetTweets
+	*
+	* Released under the MIT License
+	* http://en.wikipedia.org/wiki/MIT_License
 */
 
 (function($){
