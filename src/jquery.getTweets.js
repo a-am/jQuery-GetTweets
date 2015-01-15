@@ -1,13 +1,19 @@
 /*
-  * GetTweets v@VERSION
-  *
-  * A jQuery plugin to retrive tweets from multiple users
-  *
-  * https://github.com/adamatmonk/jquery-gettweets
-  *
-  * Copyright 2011 by Adam Randlett
-    * Released under the MIT License
-    * http://en.wikipedia.org/wiki/MIT_License
+	* getTweets
+	*
+	* Retrieve tweets from multiple users or search queries
+	*
+	* Adam Randlett
+	* Chris Ullyott
+	*
+	* MonkDev repository:
+	* https://github.com/MonkDev/jQuery-GetTweets
+	*
+	* Original repository:
+	* https://github.com/a-am/jQuery-GetTweets
+	*
+	* Released under the MIT License
+	* http://en.wikipedia.org/wiki/MIT_License
 */
 
 (function($){
@@ -25,9 +31,9 @@
       retweets: false,
       no_replies: false,
       rate_limit_status: false,
-      tweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} by <a href='http://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a></p></div> <div class='image'><a href='http://twitter.com/{tweetuser:screenname}'><img src='{tweetuser:image}' width='48' height='48'></a></div></div>",
-      retweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} <a href='http://twitter.com/{retweetuser:screenname}'>{retweetuser:name}</a> <span class='rt'>retweeted</span> by <a href='http://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a> </p></div> <div class='image'><a href='http://twitter.com/{tweetuser:screenname}'><img src='{retweetuser:image}' width='48' height='48'></a></div></div>"
-    }
+      tweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} by <a href='https://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a></p></div> <div class='image'><a href='https://twitter.com/{tweetuser:screenname}'><img src='{tweetuser:image}' width='48' height='48'></a></div></div>",
+      retweetstring: "<div class='tweet'><div class='header'><p class='summary'>{tweettext}</p><p class='meta'>{tweetdate} <a href='https://twitter.com/{retweetuser:screenname}'>{retweetuser:name}</a> <span class='rt'>retweeted</span> by <a href='https://twitter.com/{tweetuser:screenname}'>{tweetuser:name}</a> </p></div> <div class='image'><a href='https://twitter.com/{tweetuser:screenname}'><img src='{retweetuser:image}' width='48' height='48'></a></div></div>"
+    };
         //extend default to options
         var options = $.extend(defaults, settings);
         return this.each(function(){
@@ -50,12 +56,11 @@
           user_count;
 
 
-      //provided by twitter
+      // parses created_at
       function twitter_relative_time(time_value) {
         var values=time_value.split(" ");
-        //created_at different for search call than id call. Rearange stamp values to get this format: May 09, 2012 14:31:44
-        var time_value= options._isSearch ? values[2]+" "+values[1]+", "+values[3]+" "+values[4] : values[1]+" "+values[2]+", "+values[5]+" "+values[3];
-        var parsed_date=Date.parse(time_value);
+        var time_value= values[1]+" "+values[2]+", "+values[5]+" "+values[3];var parsed_date=Date.parse(time_value);
+        // var time_value= options._isSearch ? values[2]+" "+values[1]+", "+values[3]+" "+values[4] : values[1]+" "+values[2]+", "+values[5]+" "+values[3];
         var relative_to=(arguments.length>1)?arguments[1]:new Date();
         var delta=parseInt((relative_to.getTime()-parsed_date)/1000);
         delta=delta+(relative_to.getTimezoneOffset()*60);
@@ -80,8 +85,8 @@
       //parsers twitter @usernames creates anchor for that username
       String.prototype.parseUsername = function() {
         return this.replace(new RegExp(/[@]+[A-Za-z0-9-_]+/g), function(u) {
-          var username = u.replace("@","")
-          return u.link("http://twitter.com/"+username);
+          var username = u.replace("@","");
+          return u.link("https://twitter.com/"+username);
         });
       };
 
@@ -97,8 +102,8 @@
       // parses hashtags and adds url to tiwtter search for that hashtag
       String.prototype.parseHashtag = function() {
         return this.replace(new RegExp(/[#]+[A-Za-z0-9-_]+/g), function(t) {
-          var tag = t.replace("#","%23")
-          return t.link("http://search.twitter.com/search?q="+tag);
+          var tag = t.replace("#","%23");
+          return t.link("https://twitter.com/search?q="+tag);
         });
       };
 
@@ -115,11 +120,11 @@
 
       Storage.prototype.setObject = function(key, value) {
           this.setItem(key, JSON.stringify(value));
-      }
+      };
 
       Storage.prototype.getObject = function(key) {
           return JSON.parse(this.getItem(key));
-      }
+      };
 
       /*
        * Parses the tweetstring or retweetstring for the tweet variables
@@ -134,19 +139,21 @@
 
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at), // Calculate how many hours ago was the tweet posted
-                  '{tweeturl}'  : 'http://www.twitter.com/' +  tweet.from_user_name + '/status/' + tweet.id_str ,
+                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str,
                   '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
-                  '{tweetuser:name}' : tweet.from_user_name,
-                  '{tweetuser:screenname}' : tweet.from_user,
+                  '{tweetuser:name}' : tweet.user.name,
+                  '{tweetuser:screenname}' : tweet.user.screen_name,
                   '{tweetuser:url}': tweet.user.url,
-                  '{tweetuser:image}': tweet.user.profile_image_url
-                }
+                  '{tweetuser:image}': tweet.user.profile_image_url,
+                  '{tweetuser:location}' : tweet.user.location,
+                  '{tweetuser:description}' : tweet.user.description
+                };
 
               }else{
 
                 tweetapi = {
                   '{tweetdate}' : twitter_relative_time(tweet.created_at) , // Calculate how many hours ago was the tweet posted
-                  '{tweeturl}'  : 'http://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str ,
+                  '{tweeturl}'  : 'https://www.twitter.com/' +  tweet.user.screen_name + '/status/' + tweet.id_str,
                   '{tweettext}' : tweettext.parseUrl().parseUsername().parseEmail().parseHashtag(),
                   '{tweetuser:name}' : tweet.user.name,
                   '{tweetuser:screenname}' : tweet.user.screen_name,
@@ -155,7 +162,7 @@
                   '{tweetuser:url}': tweet.user.url,
                   '{tweetuser:image}': tweet.user.profile_image_url,
                   '{tweetsource}': tweet.source
-                }
+                };
               }
 
               var tweet_html,
@@ -186,12 +193,12 @@
       /*
        * Outputs the tweets to the assigned jquery object
        */
-
       function twitter_output(){
-        global_tweets.sort(function(a,b){ return(b.id-a.id) });
-        twitter_count = global_tweets.length;
 
-        for(var i = 0, ii = tweetoptions.howmany; i < ii; i++){
+        global_tweets.sort(function(a,b){ return(b.id-a.id) });
+        var output_count = Math.min(global_tweets.length, tweetoptions.howmany);
+
+        for(var i = 0, ii = output_count; i < ii; i++){
           $this.append(global_tweets[i].status);
         }
 
@@ -223,18 +230,20 @@
 
       /*
        * function to get the tweets for the twitter service
-       * Uses jQuerys ajax call
+       * Uses jQuery ajax call
        * Using jsonp since we are calling cross urls
        */
 
       function get_tweets(index){
+
+				var tweet_count = tweetoptions.howmany + 4; // pad with more tweets in case some are excluded
 
         if(tweetoptions.twitter_queries.length > 0){
 
           options._isSearch = true;
           $.ajax({
             dataType: 'json',
-            url: options.twitter_search_url+'?q='+encodeURIComponent(tweetoptions.twitter_queries[index])+'&include_entities=true'+'&count='+tweetoptions.howmany,
+            url: options.twitter_search_url+'?q='+encodeURIComponent(tweetoptions.twitter_queries[index])+'&include_entities=true'+'&count='+tweet_count,
             timeout: 1000,
             type: 'GET',
             async: false,
@@ -247,7 +256,7 @@
             },
             complete: function(){
               if(index < tweetoptions.twitter_queries.length -1){
-                //run this function (recursivly) to get all tweets for the next user
+                //run this function (recursively) to get all tweets for the next user
                 get_tweets(++index);
               }else{
                 //if all tweets are loaded into the global_tweets array and launch twitter_render function
@@ -260,7 +269,7 @@
 
           $.ajax({
             dataType: 'json',
-            url: options.twitter_timeline_url+'?screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.replies+'&count='+tweetoptions.howmany,
+            url: options.twitter_timeline_url+'?screen_name='+tweetoptions.twitter_users[index]+'&include_rts='+tweetoptions.retweets+'&exclude_replies='+tweetoptions.no_replies+'&count='+tweet_count,
             timeout: 1000,
             type: 'GET',
             async: false,
