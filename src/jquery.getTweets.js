@@ -132,8 +132,8 @@
 
       function twitter_parser(tweets){
         $.each(tweets, function(i,tweet){
-          if(tweet.text !== undefined) {
-              var tweettext = tweet.text,
+          if(tweet.full_text !== undefined) {
+              var tweettext = tweet.full_text,
                   tweetapi;
               if(options._isSearch){
 
